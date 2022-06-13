@@ -1,5 +1,6 @@
 from app.database.mongodb import Database
 
+
 class MdbController:
     def __init__(self):
         self.db = Database()
@@ -24,7 +25,8 @@ class MdbController:
         )
 
         if post_db:
-            return True
+            return {'inserted': True}
+        return {'inserted': False}
 
     async def put(self, data):
         put_db = await self.db.put(
