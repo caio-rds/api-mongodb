@@ -5,16 +5,14 @@ from pydantic import BaseModel
 class Get(BaseModel):
     database: str
     collection: str
-    find_one: Optional[bool]
     query: dict
-    opt_list: Optional[dict]
+    options: Optional[dict]
 
 
 class Post(BaseModel):
     database: str
     collection: str
     data: dict
-    insert_one: Optional[bool]
 
 
 class Put(BaseModel):
@@ -22,11 +20,10 @@ class Put(BaseModel):
     collection: str
     values: dict
     where: dict
-    update_one: Optional[bool]
+    upsert: Optional[bool] = False
 
 
 class Delete(BaseModel):
     database: str
     collection: str
     query: dict
-    delete_one: Optional[bool]

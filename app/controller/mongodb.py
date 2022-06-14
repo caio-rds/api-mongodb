@@ -1,3 +1,5 @@
+from fastapi.encoders import jsonable_encoder
+
 from app.database.mongodb import Database
 
 
@@ -5,46 +7,79 @@ class MdbController:
     def __init__(self):
         self.db = Database()
 
-    async def get(self, data):
-        get_db = await self.db.get(
+    async def get_one(self, data):
+        get_db = await self.db.find_one(
             database=data.database,
             collection=data.collection,
-            query=data.query,
-            opt_list=data.opt_list,
-            find_one=data.find_one
+            query=data.query
         )
+        return jsonable_encoder(get_db)
 
-        return get_db
-
-    async def post(self, data):
-        post_db = await self.db.post(
+    async def get_many(self, data):
+        get_db = await self.db.find(
             database=data.database,
             collection=data.collection,
-            data=data.data,
-            insert_one=data.insert_one
+            query=data.query
+        )
+        return jsonable_encoder(get_db)
+
+    async def post_one(self, data):
+        post_db = await self.db.insert_one(
+            database=data.database,
+            collection=data.collection,
+            data=data.data
         )
 
         if post_db:
-            return {'inserted': True}
-        return {'inserted': False}
+            return jsonable_encoder({'inserted': True})
+        return jsonable_encoder({'inserted': False})
 
-    async def put(self, data):
-        put_db = await self.db.put(
+    async def post_many(self, data):
+        post_db = await self.db.insert_many(
+            database=data.database,
+            collection=data.collection,
+            data=data.data
+        )
+
+        if post_db:
+            return jsonable_encoder({'inserted': True})
+        return jsonable_encoder({'inserted': False})
+
+    async def put_one(self, data):
+        put_db = await self.db.update_one(
             database=data.database,
             collection=data.collection,
             where=data.where,
             values=data.values,
-            update_one=data.update_one
+            upsert=data.upsert
         )
 
-        return {'modified_count': put_db}
+        return jsonable_encoder({'modified_count': put_db})
 
-    async def delete(self, data):
-        delete_db = await self.db.delete(
+    async def put_many(self, data):
+        put_db = await self.db.update_many(
             database=data.database,
             collection=data.collection,
-            query=data.query,
-            delete_one=data.delete_one
+            where=data.where,
+            values=data.values
         )
 
-        return {'deleted_count': delete_db}
+        return jsonable_encoder({'modified_count': put_db})
+
+    async def delete_one(self, data):
+        delete_db = await self.db.delete_one(
+            database=data.database,
+            collection=data.collection,
+            query=data.query
+        )
+
+        return jsonable_encoder({'deleted_count': delete_db})
+
+    async def delete_many(self, data):
+        delete_db = await self.db.delete_many(
+            database=data.database,
+            collection=data.collection,
+            query=data.query
+        )
+
+        return jsonable_encoder({'deleted_count': delete_db})
