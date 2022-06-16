@@ -6,8 +6,7 @@ http://127.0.0.1:8000/db/mongodb/
     "database": "fivem",
     "collection": "outfit",    
     "query": {"user_id": 93},
-    "options": {"_id": 0, "name": 1},
-    "find_one": True
+    "options": {"_id": 0, "name": 1}
 #### }
 
 return data (if not find_one will return a list)
@@ -17,8 +16,7 @@ http://127.0.0.1:8000/db/mongodb/
 #### {
     "database": "fivem",
     "collection": "outfit",    
-    "data": {"user_id": 93},    
-    "insert_one": True
+    "document": {"user_id": 93}
 #### }
 
 return inserted_docs number
@@ -29,8 +27,7 @@ http://127.0.0.1:8000/db/mongodb/
     "database": "fivem",
     "collection": "outfit",    
     "where": {"user_id": 93},
-    "values": {"user_id": 93, "name": "teste"},
-    "update_one": True
+    "values": {"user_id": 93, "name": "teste"}
 #### }
 
 return updated_docs number
@@ -40,8 +37,7 @@ http://127.0.0.1:8000/db/mongodb/
 #### {
     "database": "fivem",
     "collection": "outfit",    
-    "query": {"user_id": 93},
-    "delete_one": True
+    "query": {"user_id": 93}
 #### }
 
 return deleted_docs number

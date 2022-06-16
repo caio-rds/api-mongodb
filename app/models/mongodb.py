@@ -12,7 +12,7 @@ class Get(BaseModel):
 class Post(BaseModel):
     database: str
     collection: str
-    data: dict
+    document: dict
 
 
 class Put(BaseModel):

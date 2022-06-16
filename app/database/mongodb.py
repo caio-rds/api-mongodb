@@ -26,16 +26,16 @@ class Database:
         except Exception:
             raise HTTPException(detail='Exception Happened', status_code=500)
 
-    async def insert_one(self, database: str, collection: str, data: dict):
+    async def insert_one(self, database: str, collection: str, document: dict):
         try:
-            result = self.client[database][collection].insert_one(data)
+            result = self.client[database][collection].insert_one(document)
             return result.acknowledged
         except Exception:
             raise HTTPException(detail='Exception Happened', status_code=500)
 
-    async def insert_many(self, database: str, collection: str, data: dict):
+    async def insert_many(self, database: str, collection: str, document: dict):
         try:
-            result = self.client[database][collection].insert_many(data)
+            result = self.client[database][collection].insert_many(document)
             return result.acknowledged
         except Exception:
             raise HTTPException(detail='Exception Happened', status_code=500)

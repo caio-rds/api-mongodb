@@ -27,7 +27,7 @@ class MdbController:
         post_db = await self.db.insert_one(
             database=data.database,
             collection=data.collection,
-            data=data.data
+            document=data.document
         )
 
         if post_db:
@@ -38,7 +38,7 @@ class MdbController:
         post_db = await self.db.insert_many(
             database=data.database,
             collection=data.collection,
-            data=data.data
+            document=data.document
         )
 
         if post_db:
